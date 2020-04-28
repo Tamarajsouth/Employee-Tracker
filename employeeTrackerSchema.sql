@@ -1,8 +1,7 @@
 -- table for employee *******
-DROP DATABASE IF EXISTS employees_DB;
-CREATE DATABASE employees_DB;
-
-USE employees_DB;
+DROP DATABASE IF EXISTS employee_tracker_DB;
+CREATE DATABASE employee_tracker_DB;
+USE employee_tracker_DB;
 
 CREATE TABLE employees(
   id INT NOT NULL AUTO_INCREMENT,
@@ -14,27 +13,29 @@ CREATE TABLE employees(
 );
 
 -- table for role
-DROP DATABASE IF EXISTS role_DB;
-CREATE DATABASE role_DB;
-
-USE role_DB;
 
 CREATE TABLE role(
   id INT NOT NULL AUTO_INCREMENT,
   title VARCHAR(30) NOT NULL,
-  salary DECIMAL(3, 4) NOT NULL,
+  salary DECIMAL (6, 3) NULL,
   department_id INT default 0,
   PRIMARY KEY (id)
 );
 
 -- table for departments
-DROP DATABASE IF EXISTS department_DB;
-CREATE DATABASE department_DB;
-
-USE department_DB;
 
 CREATE TABLE department(
   id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(30) NOT NULL,
   PRIMARY KEY (id)
 );
+
+
+INSERT INTO employees (first_name, last_name, role_id, manager_id)
+VALUES ("Fred", "Flinstone", 1, 001), ("Big", "Bird", 2, 20), ("Strawberry", "Shortcake", 3, 990);
+
+INSERT INTO role (title, salary, department_id)
+VALUES ("Operations Manager", 103.325, 22), ("Director of Marketing", 87.990, 33), ("Office Administrator", 77.975, 00);
+
+INSERT INTO department (name)
+VALUES ("Production"), ("Marketing"), ("Accounting");
