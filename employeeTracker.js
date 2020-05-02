@@ -1,7 +1,7 @@
 // dependencies
 const mysql = require("mysql");
 const inquirer = require("inquirer");
-const cTable = require('console.table');
+// const cTable = require('console.table');
 
 
 // create the connection information for the sql database
@@ -140,7 +140,7 @@ function addRole() {
     connection.query("INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)",  
     [response.title, response.salary, response.department_id], function (err, data) {
         if (err) throw err;
-        console.log("Added New Role Successfully!")
+        console.log("Added New Role Successfully!") 
         console.table(data);
         askQuestions();
     })
@@ -232,7 +232,7 @@ function deleteEmployee(){
     ]).then(function (response){
         connection.query("DELETE FROM employees WHERE first_name = ?", [response.first_name], function(err, data) {
             console.log("Employee DELETED!");
-            viewEmployee();
+            // viewEmployee();
     })
     askQuestions();
     })
@@ -248,7 +248,7 @@ function deleteDepartment(){
     ]).then(function (response){
         connection.query("DELETE FROM department WHERE name = ?", [response.department], function(err, data) {
             console.log("Department DELETED!");
-            viewDepartments();
+            // viewDepartments();
     })
     askQuestions();
 })
@@ -264,7 +264,7 @@ function deleteRole(){
     ]).then(function (response){
         connection.query("DELETE FROM roles WHERE title = ?", [response.roles], function(err, data) {
             console.log("Role DELETED!");
-            viewRoles();
+            // viewRoles();
     })
     askQuestions();
 })
