@@ -1,7 +1,7 @@
 // dependencies
 const mysql = require("mysql");
 const inquirer = require("inquirer");
-// const cTable = require('console.table');
+const cTable = require('console.table');
 
 
 // create the connection information for the sql database
@@ -43,6 +43,8 @@ function askQuestions() {
             "View employee",
             "Update employee role",
             "Delete employee",
+            "Delete department",
+            "Delete role",
             "EXIT",
             ],
       })
@@ -77,6 +79,12 @@ function askQuestions() {
             case "Delete employee":
                 deleteEmployee()
                 break;    
+            case "Delete department":
+                deleteDepartment()
+                break;
+            case "Delete role":
+                deleteRole()
+                break;        
             default:
                 connection.end()
                 break;
@@ -213,7 +221,7 @@ function updateEmployeeRole() {
     })
 }       
 
-// delete employee ***BONUS***!!!!
+// delete employee / department/ role ***BONUS***!!!!
 function deleteEmployee(){
     inquirer.prompt([
         {
@@ -228,5 +236,72 @@ function deleteEmployee(){
     })
     askQuestions();
     })
-}    
+}
+
+function deleteDepartment(){
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "department",
+            message: "Which department would you like to delete?"
+        }
+    ]).then(function (response){
+        connection.query("DELETE FROM department WHERE name = ?", [response.department], function(err, data) {
+            console.log("Department DELETED!");
+            viewDepartments();
+    })
+    askQuestions();
+})
+}
+
+function deleteRole(){
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "roles",
+            message: "Which role would you like to delete?"
+        }
+    ]).then(function (response){
+        connection.query("DELETE FROM roles WHERE title = ?", [response.roles], function(err, data) {
+            console.log("Role DELETED!");
+            viewRoles();
+    })
+    askQuestions();
+})
+}
+
+// function deleteOptions(){
+//     inquirer.prompt([
+//         {
+//             type: "list",
+//             name: "deleteOptions",
+//             message: "Select where to delete data from",
+//             choices: ["Employee", "Department", "Role"]
+//         }
+//     ]).then(function (response){
+//         if (deleteOptions === "Employee") {
+//             function deleteEmployee(){
+//                 inquirer.prompt([
+//                     {
+//                         type: "input",
+//                         name: "first_name",
+//                         message: "Which employee (first name only) would you like to delete?"
+//                     }
+//                 ]).then(function (response){
+//                     connection.query("DELETE FROM employees WHERE first_name = ?", [response.first_name], function(err, data) {
+//                         console.log("Employee DELETED!");
+//                         viewEmployee();
+//                         deleteEmployee();
+//                 })
+//             })
+//             }        }   
+//         if (deleteOptions === "Department") {
+//         deleteDepartment();
+//         }
+//         else if (deleteOptions === "Role") {
+//         deleteRole();
+//         } 
+//   });
+// }
+
 
