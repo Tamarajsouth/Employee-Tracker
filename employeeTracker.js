@@ -174,7 +174,7 @@ function addEmployee() {
         [response.first_name, response.last_name, response.manager_id, response.role_id], function(err, data) {
             if (err) throw err;
             console.table("Added New Employee!");
-            viewEmployee();
+            // viewEmployee();
             askQuestions();
         })
     })
@@ -216,7 +216,7 @@ function updateEmployeeRole() {
         connection.query("UPDATE employees SET role_id = ? WHERE first_name = ?", [response.role_id, response.name], function (err, data) {
             console.table(data);
         })
-        viewEmployee();
+        // viewEmployee();
         askQuestions();
     })
 }       
@@ -232,7 +232,7 @@ function deleteEmployee(){
     ]).then(function (response){
         connection.query("DELETE FROM employees WHERE first_name = ?", [response.first_name], function(err, data) {
             console.log("Employee DELETED!");
-            viewEmployee();
+            // viewEmployee();
     })
     askQuestions();
     })
@@ -248,7 +248,7 @@ function deleteDepartment(){
     ]).then(function (response){
         connection.query("DELETE FROM department WHERE name = ?", [response.department], function(err, data) {
             console.log("Department DELETED!");
-            viewDepartments();
+            // viewDepartments();
     })
     askQuestions();
 })
